@@ -4,7 +4,7 @@ from deepdiff import DeepDiff
 
 MODIFIED_PANEL_PATH = "panel/modified-panel.json"
 REPL_DASH_PATH = "dashboards/replicate/dashboards/general"
-DASHBOARD_UID = "dashboard-2af4fa37-a4c8-41f8-a045-5c010869b172"  # <- Cambia por tu UID real
+DASHBOARD_UID = "dashboard-2af4fa37-a4c8-41f8-a045-5c010869b172"
 DASHBOARD_FILENAME = f"{DASHBOARD_UID}.json"
 
 def load_json(path):
@@ -32,19 +32,15 @@ def sync_panel():
 
     for idx, p in enumerate(panels):
         if p["id"] == panel_id:
-            # Panel encontrado, actualizar (sin cambiar gridPos)
-            old = {k: v for k, v in p.items() if k != "gridPos"}
-            new = {k: v for k, v in panel.items() if k != "gridPos"}
-            diff = DeepDiff(old, new, ignore_order=True)
-            if diff:
-                print(f"✅ Panel {panel_id} encontrado. Actualizando...")
-                for key in new:
-                    if key != "gridPos":
-                        panels[idx][key] = new[key]
-                save_json(path, dashboard)
-                print(f"💾 Guardado: {path}")
-            else:
-                print(f"ℹ️ Panel {panel_id} ya está sincronizado.")
+            print(f"✅ Panel {panel_id} encontrado. Reemplazando contenido (manteniendo posición)...")
+            grid_pos = p.get("gridPos", {})
+            # Reemplaza todo el panel por el nuevo, pero preserva la posición
+            new_panel = panel.copy()
+            new_panel["gridPos"] = grid_pos
+            panels[idx] = new_panel
+            dashboard["spec"]["panels"] = panels
+            save_json(path, dashboard)
+            print(f"💾 Guardado: {path}")
             return
 
     # Panel no encontrado: agregar al final

@@ -17,7 +17,7 @@
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations \u0026 Alerts",
+          "name": "Annotations & Alerts",
           "type": "dashboard"
         }
       ]
@@ -28,7 +28,7 @@
     "links": [],
     "panels": [
       {
-        "description": "Descripción de Hola Mundo",
+        "description": "Descripci\u00f3n de Hola Mundo",
         "fieldConfig": {
           "defaults": {},
           "overrides": []
@@ -54,9 +54,62 @@
         "type": "text"
       },
       {
-        "description": "CON UNA FEATURE",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "fieldConfig": {
-          "defaults": {},
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "barWidthFactor": 0.6,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green"
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
           "overrides": []
         },
         "gridPos": {
@@ -67,17 +120,26 @@
         },
         "id": 3,
         "options": {
-          "code": {
-            "language": "plaintext",
-            "showLineNumbers": false,
-            "showMiniMap": false
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
           },
-          "content": "CUERPO DEL HOLA MUNDO",
-          "mode": "markdown"
+          "tooltip": {
+            "hideZeros": false,
+            "mode": "single",
+            "sort": "none"
+          }
         },
         "pluginVersion": "12.0.2",
-        "title": "SEGUNDO HOLA MUNDO",
-        "type": "text"
+        "targets": [
+          {
+            "refId": "A"
+          }
+        ],
+        "title": "New panel",
+        "type": "timeseries"
       },
       {
         "datasource": {
@@ -137,6 +199,64 @@
         ],
         "title": "Stat de Hola Mundo",
         "type": "stat"
+      },
+      {
+        "id": 4,
+        "type": "gauge",
+        "title": "New panel",
+        "gridPos": {
+          "h": 8,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "fieldConfig": {
+          "defaults": {
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "color": {
+              "mode": "thresholds"
+            }
+          },
+          "overrides": []
+        },
+        "pluginVersion": "12.0.2",
+        "targets": [
+          {
+            "refId": "A"
+          }
+        ],
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "options": {
+          "reduceOptions": {
+            "values": false,
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": ""
+          },
+          "orientation": "auto",
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true,
+          "sizing": "auto",
+          "minVizWidth": 75,
+          "minVizHeight": 75
+        }
       }
     ],
     "preload": false,
