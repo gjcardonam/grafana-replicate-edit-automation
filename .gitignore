@@ -1,0 +1,16 @@
+# Ignorar contextos con tokens
+config/*.sh
+
+# Entornos virtuales
+venv/
+.env
+
+# Archivos de sistema
+.DS_Store
+
+# Archivos temporales de VSCode
+.vscode/
+
+# Backups o archivos temporales
+*~
+*.swp
